@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <script type="text/javascript">
+        // Java script function to call C# code Method on Control+P key
+        function disableCtrlKeyCombination(e)
+        {
+            // list all CTRL + key combination you want to disable
+            var key;
+            var isCtrl;
+            if (window.event)
+            {
+                key = window.event.keyCode;
+                if (window.event.ctrlKey) {
+                    isCtrl = true;
+                }
+                else
+                {
+                    isCtrl = false;
+                }
+            }
+
+            if (isCtrl)
+            {
+                if ("p" == String.fromCharCode(key).toLowerCase())
+                {
+                    // Here I have to call C# code Method
+                    window.external.PrintReport();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Call disableCtrlKeyCombination this method on KeyDown, keyPress
+        document.onkeydown = disableCtrlKeyCombination;
+
+        document.keypress = disableCtrlKeyCombination;
+    </script>
+</head>
+<body>
+    <div id="reportContent">
+    </div>
+</body>
+</html>
